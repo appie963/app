@@ -15,9 +15,9 @@ def sql(sql_req='select * from accout'):
     return res
 
 
-print()
-s = sql('select * from usertable')
-
+all_usertable = sql('select * from usertable')
+for oneList in all_usertable:
+    print()
 
 # 首页自动跳转至login.html
 @app.route('/')
