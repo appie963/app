@@ -36,6 +36,7 @@ def sql_insert(username, password):
     return res
 
 
+
 print(sql_insert("123","1231"))
 
 
