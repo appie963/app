@@ -15,9 +15,29 @@ def sql(sql_req='select * from accout'):
     return res
 
 
-all_usertable = sql('select * from usertable')
-for oneList in all_usertable:
-    print()
+def sql_insert(username, password):
+    conn = pymysql.connect('132.232.63.133', 'root', 'rootroot', 'accbook')
+    cursor = conn.cursor()
+    sql_cmd = "INSERT INTO userlist(username, password) VALUES ('%s', '%s')" % (username, password)
+
+    try:
+        # 执行sql语句
+        cursor.execute(sql_cmd)
+        # 执行sql语句
+        conn.commit()
+    except:
+        # 发生错误时回滚
+        conn.rollback()
+    cursor.execute('select * from userlist')
+
+    res = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return res
+
+
+print(sql_insert("123","1231"))
+
 
 # 首页自动跳转至login.html
 @app.route('/')
@@ -36,10 +56,20 @@ def success():
         return redirect(url_for('index'))
 
 
-# 登录认证界面
+def login_acc(user_name, user_passwd):
+    all_usertable = sql('select * from userlist')
+    for user_info in all_usertable:
+        print(user_info)
+    if user_name in user_info and user_passwd in user_info:
+        return True
+    else:
+        return False
+
+
 @app.route('/login', methods=['POST'])
 def login():
-    if request.method == 'POST':
+    # 登陆认证
+    if request.method == 'POST' and login_acc(request.form['nm'], request.form['passwd']):
         return render_template('success.html', user=request.form['nm'], passwd=request.form['passwd'])
     else:
         return redirect(url_for('index'))
@@ -56,6 +86,7 @@ def register():
     if request.method == 'POST':
         print(request.form['reg_name'])
         print(request.form['reg_passwd'])
+
         return render_template('success.html', user=request.form['reg_name'], passwd=request.form['reg_passwd'])
     else:
         return redirect(url_for('index'))
