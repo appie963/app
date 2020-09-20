@@ -81,12 +81,15 @@ def login_acc(user_name, user_passwd):
         print(user_info)
         print(user_name)
         print(user_passwd)
-    if user_name in user_info and user_passwd in user_info:
+    if user_name == user_info and user_passwd == user_info:
         return True
     else:
         return False
 
-print(login_acc("123","123"))
+# print(login_acc("123","1231"))
+
+
+
 
 @app.route('/login', methods=['POST'])
 def login():
