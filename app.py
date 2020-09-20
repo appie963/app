@@ -36,8 +36,26 @@ def sql_insert(username, password):
     return res
 
 
+# print(sql_insert("123", "1231"))
 
-print(sql_insert("123","1231"))
+
+class Db:
+    def sql_init(self, sql_req='select * from accout',
+                 host='132.232.63.133',
+                 admin_user='root',
+                 admin_password='rootroot',
+                 db_name='accbook'):
+        conn = pymysql.connect(host, admin_user, admin_password, db_name)
+        cursor = conn.cursor()
+        cursor.execute(sql_req)
+        res = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        return res
+
+
+db_con = Db()
+db_con.sql_init()
 
 
 # 首页自动跳转至login.html
@@ -61,11 +79,14 @@ def login_acc(user_name, user_passwd):
     all_usertable = sql('select * from userlist')
     for user_info in all_usertable:
         print(user_info)
+        print(user_name)
+        print(user_passwd)
     if user_name in user_info and user_passwd in user_info:
         return True
     else:
         return False
 
+print(login_acc("123","123"))
 
 @app.route('/login', methods=['POST'])
 def login():
