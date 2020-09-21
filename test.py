@@ -1,6 +1,12 @@
-a = (8, 'admin', 'password_', 'datetime.datetime(2020, 9, 20, 2, 33, 58)')
-
-# for _ in a:
-#     if 'admin' == _ and 'password_' == _:
-#         print('s')
-# 错误逻辑
+class Db:
+    host = '132.232.63.133'
+    admin_user = 'root'
+    def sql(self, sql_req='select * from accout'):
+        # 连接database
+        conn = pymysql.connect(Db.host, 'root', 'rootroot', 'accbook')
+        cursor = conn.cursor()
+        cursor.execute(sql_req)
+        res = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        return res

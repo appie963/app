@@ -40,22 +40,30 @@ def sql_insert(username, password):
 
 
 class Db:
-    def sql_init(self, sql_req='select * from accout',
-                 host='132.232.63.133',
-                 admin_user='root',
-                 admin_password='rootroot',
-                 db_name='accbook'):
-        conn = pymysql.connect(host, admin_user, admin_password, db_name)
+    # 数据库基本公有属性
+    host = '132.232.63.133'
+    admin_user = 'root'
+    admin_password = 'rootroot'
+    db_name = 'accbook'
+    table_name = 'accout'
+
+    # 1、优先调用sql_init
+    def sql_init(self, sql_cmd='select * from accout'):
+        conn = pymysql.connect(Db.host, Db.admin_user, Db.admin_password, Db.db_name)
         cursor = conn.cursor()
-        cursor.execute(sql_req)
+        cursor.execute(sql_cmd)
         res = cursor.fetchall()
         cursor.close()
-        conn.close()
+
+        def sql_close():
+            conn.close()
+
+        sql_close()
         return res
 
 
 db_con = Db()
-db_con.sql_init()
+print(db_con.sql_init())
 
 
 # 首页自动跳转至login.html
@@ -86,9 +94,8 @@ def login_acc(user_name, user_passwd):
     else:
         return False
 
+
 # print(login_acc("123","1231"))
-
-
 
 
 @app.route('/login', methods=['POST'])
