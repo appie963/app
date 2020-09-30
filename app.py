@@ -46,8 +46,24 @@ class Db:
         if line == 'all' or '' or '*':
             return self._cur.fetchall()
 
+    def insert(self, table_name, field, value):
+        sql_cmd = "insert into '%s' ('%s') values ('%s') " % (str(table_name), str(field), str(value))
+            # 执行sql语句
+        print(sql_cmd)
+        try:
+            self._cur.execute(sql_cmd)
+            self._conn.commit()
+        except ConnectionError:
+            # 如果发生错误则回滚
+            self._conn.rollback()
 
-d = Db(db_info)
+
+db = Db(db_info)
+# db.insert(db_info[0],field='',value='')
+print(
+db.query(db_info['table_name'][1], '*')
+)
+db.insert(db_info['table_name'][1], 'username,password', 'test_name,pwd')
 
 
 # 首页自动跳转至login.html
@@ -68,19 +84,14 @@ def success():
 
 
 def login_acc(user_name, user_passwd):
-    all_usertable = d.query(db_info['table_name'][1], '*')
+    all_usertable = db.query(db_info['table_name'][1], '*')
 
     for user_info in all_usertable:
-        print(user_info)
-        print("用户名", user_name)
-        print("密码", user_passwd)
         if user_name == user_info[1] and user_passwd == user_info[2]:
             return True
-        # else:
-        #     return False
 
 
-print(type(login_acc("admin", "password")))
+# print(type(login_acc("admin", "password")))
 
 
 @app.route('/login', methods=['POST'])
