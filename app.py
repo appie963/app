@@ -3,67 +3,51 @@ import pymysql
 
 app = Flask(__name__)
 
-
-def sql(sql_req='select * from accout'):
-    # 连接database
-    conn = pymysql.connect('132.232.63.133', 'root', 'rootroot', 'accbook')
-    cursor = conn.cursor()
-    cursor.execute(sql_req)
-    res = cursor.fetchall()
-    cursor.close()
-    conn.close()
-    return res
-
-
-def sql_insert(username, password):
-    conn = pymysql.connect('132.232.63.133', 'root', 'rootroot', 'accbook')
-    cursor = conn.cursor()
-    sql_cmd = "INSERT INTO userlist(username, password) VALUES ('%s', '%s')" % (username, password)
-
-    try:
-        # 执行sql语句
-        cursor.execute(sql_cmd)
-        # 执行sql语句
-        conn.commit()
-    except:
-        # 发生错误时回滚
-        conn.rollback()
-    cursor.execute('select * from userlist')
-
-    res = cursor.fetchall()
-    cursor.close()
-    conn.close()
-    return res
-
-
-# print(sql_insert("123", "1231"))
+db_info = {
+    'host': '132.232.63.133',
+    'user': 'root',
+    'pwd': 'rootroot',
+    'db': 'accbook',
+    'table_name': ['accout', 'userlist']
+}
 
 
 class Db:
-    # 数据库基本公有属性
-    host = '132.232.63.133'
-    admin_user = 'root'
-    admin_password = 'rootroot'
-    db_name = 'accbook'
-    table_name = 'accout'
 
-    # 1、优先调用sql_init
-    def sql_init(self, sql_cmd='select * from accout'):
-        conn = pymysql.connect(Db.host, Db.admin_user, Db.admin_password, Db.db_name)
-        cursor = conn.cursor()
-        cursor.execute(sql_cmd)
-        res = cursor.fetchall()
-        cursor.close()
+    def __init__(self, o):
+        if 'host' in o and \
+                'user' in o and \
+                'pwd' in o and \
+                'db' in o:
+            self.o = o
+        self._conn = pymysql.connect(self.o['host'], self.o['user'], self.o['pwd'], self.o['db'])
+        self._cur = self._conn.cursor()
+        # 判断_cur与_conn钩子函数是否成功
+        if self._conn and self._cur:
+            pass
+        else:
+            raise ConnectionError  # 异常抛出
 
-        def sql_close():
-            conn.close()
+    def close(self):
+        self._cur.close()
+        self._conn.close()
 
-        sql_close()
-        return res
+    def query(self, tb_name, line, row='*', ):
+        # query db_info['table_name']
+        # need: sql_cmd,table_name
+        # return list of table
+        sql_cmd = 'select ' + row + ' from ' + tb_name
+        self._cur.execute(sql_cmd)
+        if line == 1:
+            return self._cur.fetchone()
+        elif line != 1 and type(line) == int:
+            return self._cur.fetchmany(line)
+
+        if line == 'all' or '' or '*':
+            return self._cur.fetchall()
 
 
-db_con = Db()
-print(db_con.sql_init())
+d = Db(db_info)
 
 
 # 首页自动跳转至login.html
@@ -84,18 +68,19 @@ def success():
 
 
 def login_acc(user_name, user_passwd):
-    all_usertable = sql('select * from userlist')
+    all_usertable = d.query(db_info['table_name'][1], '*')
+
     for user_info in all_usertable:
         print(user_info)
-        print(user_name)
-        print(user_passwd)
-    if user_name == user_info and user_passwd == user_info:
-        return True
-    else:
-        return False
+        print("用户名", user_name)
+        print("密码", user_passwd)
+        if user_name == user_info[1] and user_passwd == user_info[2]:
+            return True
+        # else:
+        #     return False
 
 
-# print(login_acc("123","1231"))
+print(type(login_acc("admin", "password")))
 
 
 @app.route('/login', methods=['POST'])
