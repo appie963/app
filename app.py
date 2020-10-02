@@ -46,24 +46,35 @@ class Db:
         if line == 'all' or '' or '*':
             return self._cur.fetchall()
 
+    def __table_name(self, table_index):
+        # return table index for table_name
+        if table_index == 1 or table_index == 'accout':
+            return self.o['table_name'][0]
+        elif table_index == 2 or table_index == 'userlist':
+            return self.o['table_name'][1]
+        else:
+            raise NameError
+
     def insert(self, table_name, field, value):
-        sql_cmd = "insert into '%s' ('%s') values ('%s') " % (str(table_name), str(field), str(value))
-            # 执行sql语句
+        sql_cmd = "insert into %s (%s) values ('%s') " % (self.__table_name(table_name), field, value)
+        # 执行sql语句
         print(sql_cmd)
-        try:
-            self._cur.execute(sql_cmd)
-            self._conn.commit()
-        except ConnectionError:
-            # 如果发生错误则回滚
-            self._conn.rollback()
+        if value[0]:
+            print(value)
+        # try:
+        #     self._cur.execute(sql_cmd)
+        #     self._conn.commit()
+        # except ConnectionError:
+        #     # 如果发生错误则回滚
+        #     self._conn.rollback()
 
 
 db = Db(db_info)
 # db.insert(db_info[0],field='',value='')
 print(
-db.query(db_info['table_name'][1], '*')
+    # db.query(db_info['table_name'][1], '*')
 )
-db.insert(db_info['table_name'][1], 'username,password', 'test_name,pwd')
+db.insert(2, 'username,password', 'test_name,pwd')
 
 
 # 首页自动跳转至login.html
