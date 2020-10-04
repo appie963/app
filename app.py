@@ -13,10 +13,12 @@ db_info = {
 }
 # 加载自定义库zdb
 db = zdb(db_info)
-print(
-    print(db.query(1, '*'))
-)
 
+print(
+
+db.query('accout', '*')
+
+)
 
 # 首页自动跳转至login.html
 @app.route('/')

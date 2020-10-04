@@ -46,7 +46,7 @@ class zdb:
         """
         self._cur.close()
         self._conn.close()
-        return None
+        return self
 
     def query(self, tb_name, line, row='*', ):
         # query db_info['table_name']
@@ -80,3 +80,4 @@ class zdb:
         print(sql_cmd)
         self.__commit_db(sql_cmd)
         self.__close()
+        return self
