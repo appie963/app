@@ -1,8 +1,9 @@
+# 初始化
 from flask import Flask, redirect, url_for, request, render_template
-import pymysql
+from zdb import zdb
 
 app = Flask(__name__)
-
+# 数据库相关信息
 db_info = {
     'host': '132.232.63.133',
     'user': 'root',
@@ -10,71 +11,11 @@ db_info = {
     'db': 'accbook',
     'table_name': ['accout', 'userlist']
 }
-
-
-class Db:
-
-    def __init__(self, o):
-        if 'host' in o and \
-                'user' in o and \
-                'pwd' in o and \
-                'db' in o:
-            self.o = o
-        self._conn = pymysql.connect(self.o['host'], self.o['user'], self.o['pwd'], self.o['db'])
-        self._cur = self._conn.cursor()
-        # 判断_cur与_conn钩子函数是否成功
-        if self._conn and self._cur:
-            pass
-        else:
-            raise ConnectionError  # 异常抛出
-
-    def close(self):
-        self._cur.close()
-        self._conn.close()
-
-    def query(self, tb_name, line, row='*', ):
-        # query db_info['table_name']
-        # need: sql_cmd,table_name
-        # return list of table
-        sql_cmd = 'select ' + row + ' from ' + tb_name
-        self._cur.execute(sql_cmd)
-        if line == 1:
-            return self._cur.fetchone()
-        elif line != 1 and type(line) == int:
-            return self._cur.fetchmany(line)
-
-        if line == 'all' or '' or '*':
-            return self._cur.fetchall()
-
-    def __table_name(self, table_index):
-        # return table index for table_name
-        if table_index == 1 or table_index == 'accout':
-            return self.o['table_name'][0]
-        elif table_index == 2 or table_index == 'userlist':
-            return self.o['table_name'][1]
-        else:
-            raise NameError
-
-    def insert(self, table_name, field, value):
-        sql_cmd = "insert into %s (%s) values ('%s') " % (self.__table_name(table_name), field, value)
-        # 执行sql语句
-        print(sql_cmd)
-        if value[0]:
-            print(value)
-        # try:
-        #     self._cur.execute(sql_cmd)
-        #     self._conn.commit()
-        # except ConnectionError:
-        #     # 如果发生错误则回滚
-        #     self._conn.rollback()
-
-
-db = Db(db_info)
-# db.insert(db_info[0],field='',value='')
+# 加载自定义库zdb
+db = zdb(db_info)
 print(
-    # db.query(db_info['table_name'][1], '*')
+    print(db.query(1, '*'))
 )
-db.insert(2, 'username,password', 'test_name,pwd')
 
 
 # 首页自动跳转至login.html
@@ -100,9 +41,6 @@ def login_acc(user_name, user_passwd):
     for user_info in all_usertable:
         if user_name == user_info[1] and user_passwd == user_info[2]:
             return True
-
-
-# print(type(login_acc("admin", "password")))
 
 
 @app.route('/login', methods=['POST'])
