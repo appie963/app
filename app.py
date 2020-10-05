@@ -15,10 +15,9 @@ db_info = {
 db = zdb(db_info)
 
 print(
-
-db.query('accout', '*')
-
+    db.query('accout', '*')
 )
+
 
 # 首页自动跳转至login.html
 @app.route('/')
