@@ -15,8 +15,24 @@ db_info = {
 db = zdb(db_info)
 
 print(
-    db.query('accout', '*')
+    db.query('userlist', '*')
 )
+
+
+def login_acc(user_name, user_passwd):
+    """
+    判断用户名密码
+    :param user_name:用户名
+    :param user_passwd:密码
+    :return:返回true或false
+    """
+    all_usertable = db.query(db_info['table_name'][1], '*')
+
+    for user_info in all_usertable:
+        if user_name == user_info[1] and user_passwd == user_info[2]:
+            return True
+        else:
+            return False
 
 
 # 首页自动跳转至login.html
@@ -34,14 +50,6 @@ def success():
         # 判断是否为post方式路由不是则认定为直接访问，返回404
     else:
         return redirect(url_for('index'))
-
-
-def login_acc(user_name, user_passwd):
-    all_usertable = db.query(db_info['table_name'][1], '*')
-
-    for user_info in all_usertable:
-        if user_name == user_info[1] and user_passwd == user_info[2]:
-            return True
 
 
 @app.route('/login', methods=['POST'])
