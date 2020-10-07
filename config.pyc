@@ -1,5 +1,5 @@
 db_info = {
-    'host': '132.232.63.133',
+    'host': 'xxx',
     'user': 'root',
     'pwd': 'rootroot',
     'db': 'accbook',
