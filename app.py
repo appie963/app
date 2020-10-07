@@ -1,17 +1,13 @@
 # 初始化
 from flask import Flask, redirect, url_for, request, render_template
 from zdb import zdb
-from config import db_info
-
+from config import *
 app = Flask(__name__)
-# 数据库相关信息
 
 # 加载自定义库zdb
 db = zdb(db_info)
-
 print(
     # db.query('userlist', '*')
-
 )
 
 

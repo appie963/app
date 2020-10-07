@@ -1,7 +1,7 @@
 db_info = {
-    'host': 'xx',
-    'user': 'xx',
-    'pwd': 'xx',
-    'db': 'xx',
-    'table_name': ['xx', 'xx']
+    'host': '132.232.63.133',
+    'user': 'root',
+    'pwd': 'rootroot',
+    'db': 'accbook',
+    'table_name': ['accout', 'userlist']
 }
