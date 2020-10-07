@@ -2,6 +2,7 @@
 from flask import Flask, redirect, url_for, request, render_template
 from zdb import zdb
 from config import *
+
 app = Flask(__name__)
 
 # 加载自定义库zdb
@@ -18,13 +19,15 @@ def login_acc(user_name, user_passwd):
     :param user_passwd:密码
     :return:返回true或false
     """
-    all_usertable = db.query(db_info['table_name'][1], '*')
+    all_usertable = db.query('userlist', '*')
 
     for user_info in all_usertable:
-        if user_name == user_info[1] and user_passwd == user_info[2]:
+        if user_name in user_info and user_passwd in user_info:
             return True
-        else:
-            return False
+    return False
+
+
+# login_acc('test1', 'pwd')
 
 
 # 首页自动跳转至login.html
@@ -47,8 +50,9 @@ def success():
 @app.route('/login', methods=['POST'])
 def login():
     # 登陆认证
+    print(login_acc(request.form['nm'], request.form['passwd']))
     if request.method == 'POST' and login_acc(request.form['nm'], request.form['passwd']):
-        return render_template('success.html', user=request.form['nm'], passwd=request.form['passwd'])
+        return render_template('blog.html', user=request.form['nm'], passwd=request.form['passwd'])
     else:
         return redirect(url_for('index'))
 

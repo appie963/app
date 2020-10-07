@@ -1,0 +1,191 @@
+<html lang="zh-CN">
+<head>
+    <meta charset="utf8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Signin Template for Bootstrap</title>
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/loginreg.css" rel="stylesheet" type="text/css"/>
+    <!-- Custom styles for this template -->
+
+
+</head>
+
+<body>
+<!-- 容器 -->
+<div class="container">
+    <!-- 头部 -->
+    <div class="page-header">
+        <h1>{{ user }}的博客</h1>
+        <p>因为菜，所以需要更加努力！</p>
+    </div>
+    <!-- 导航 -->
+    <nav class="navbar navbar-inverse">
+        <ul class="nav navbar-nav">
+            <li><a href="#">首页</a></li>
+            <li class="active"><a href="#">HTML</a></li>
+            <li><a href="#">CSS</a></li>
+            <li><a href="#">JavaScript</a></li>
+            <li>
+                <!-- class是caret的 显现效果为一个倒三角形 -->
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">PHP <span class="caret"></span></a>
+                <!-- 下拉菜单 -->
+                <ul class="dropdown-menu">
+                    <li><a href="#">PDO</a></li>
+                    <li><a href="#">基本函数</a></li>
+                    <li><a href="#">OOP</a></li>
+                    <!-- 下拉子菜单的分割线 -->
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">MVC</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Linux</a></li>
+            <li><a href="#">bootstrap</a></li>
+            <li>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">账号管理 <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">添加文章</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">更改密码</a></li>
+                    <li><a href="#">登录</a></li>
+                    <li><a href="#">注销</a></li>
+                </ul>
+            </li>
+        </ul>
+        <!-- 搜索框 -->
+        <form class="navbar-form navbar-right">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="关键字">
+            </div>
+            <button type="submit" class="btn btn-default">搜索</button>
+        </form>
+    </nav>
+    <!-- 主体内容 -->
+    <div class="row">
+        <!-- 左-内容 -->
+        <div class="col-md-9">
+            <article>
+                <header>
+                    <h2><a href="#">文章标题1</a></h2>
+                </header>
+                <div class="cont">
+                    <p>“乘风破浪会有时，直挂云帆济沧海。”别让怯弱否定自己，别让惫懒误了青春。一个人不奋斗不能有所成就，一个国家不奋斗不能立足世界，一个民族不奋斗不能兴盛强大</p>
+                    <p>“乘风破浪会有时，直挂云帆济沧海。”别让怯弱否定自己，别让惫懒误了青春。一个人不奋斗不能有所成就，一个国家不奋斗不能立足世界，一个民族不奋斗不能兴盛强大</p>
+                </div>
+                <div class="text-right">
+                    <a href="#" class="btn btn-primary">阅读更多</a>
+                </div>
+            </article>
+            <article>
+                <header>
+                    <h2><a href="#">文章标题2</a></h2>
+                </header>
+                <div class="cont">
+                    <p>“乘风破浪会有时，直挂云帆济沧海。”别让怯弱否定自己，别让惫懒误了青春。一个人不奋斗不能有所成就，一个国家不奋斗不能立足世界，一个民族不奋斗不能兴盛强大</p>
+                    <p>“乘风破浪会有时，直挂云帆济沧海。”别让怯弱否定自己，别让惫懒误了青春。一个人不奋斗不能有所成就，一个国家不奋斗不能立足世界，一个民族不奋斗不能兴盛强大</p>
+                </div>
+                <div class="text-right">
+                    <a href="#" class="btn btn-primary">阅读更多</a>
+                </div>
+            </article>
+            <article>
+                <header>
+                    <h2><a href="#">文章标题3</a></h2>
+                </header>
+                <div class="cont">
+                    <p>“乘风破浪会有时，直挂云帆济沧海。”别让怯弱否定自己，别让惫懒误了青春。一个人不奋斗不能有所成就，一个国家不奋斗不能立足世界，一个民族不奋斗不能兴盛强大</p>
+                    <p>“乘风破浪会有时，直挂云帆济沧海。”别让怯弱否定自己，别让惫懒误了青春。一个人不奋斗不能有所成就，一个国家不奋斗不能立足世界，一个民族不奋斗不能兴盛强大</p>
+                </div>
+                <div class="text-right">
+                    <a href="#" class="btn btn-primary">阅读更多</a>
+                </div>
+            </article>
+            <div class="text-right">
+                <ul class="pagination text">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 右-侧边栏 -->
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    栏目列表1
+                </div>
+                <div class="panel-body">
+                    <ul class="list-unstyled">
+                        <li><a href="#">php技术</a></li>
+                        <li><a href="#">聊人生</a></li>
+                        <li><a href="#">畅理想</a></li>
+                        <li><a href="#">个人心情</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    栏目列表2
+                </div>
+                <div class="panel-body">
+                    <ul class="list-unstyled">
+                        <li><a href="#">php技术</a></li>
+                        <li><a href="#">聊人生</a></li>
+                        <li><a href="#">畅理想</a></li>
+                        <li><a href="#">个人心情</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    栏目列表3
+                </div>
+                <div class="panel-body">
+                    <ul class="list-unstyled">
+                        <li><a href="#">php技术</a></li>
+                        <li><a href="#">聊人生</a></li>
+                        <li><a href="#">畅理想</a></li>
+                        <li><a href="#">个人心情</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    栏目列表4
+                </div>
+                <div class="panel-body">
+                    <ul class="list-unstyled">
+                        <li><a href="#">php技术</a></li>
+                        <li><a href="#">聊人生</a></li>
+                        <li><a href="#">畅理想</a></li>
+                        <li><a href="#">个人心情</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- 尾部 -->
+    <footer>
+        <div class="well text-center">
+            关于本站及版权申明 | 在线留言 | 隐私保护 | RSS订阅站长统计
+        </div>
+    </footer>
+</div>
+</body>
+</html>
