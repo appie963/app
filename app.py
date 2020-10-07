@@ -1,21 +1,17 @@
 # 初始化
 from flask import Flask, redirect, url_for, request, render_template
 from zdb import zdb
+from config import db_info
 
 app = Flask(__name__)
 # 数据库相关信息
-db_info = {
-    'host': '132.232.63.133',
-    'user': 'root',
-    'pwd': 'rootroot',
-    'db': 'accbook',
-    'table_name': ['accout', 'userlist']
-}
+
 # 加载自定义库zdb
 db = zdb(db_info)
 
 print(
-    db.query('userlist', '*')
+    # db.query('userlist', '*')
+
 )
 
 
