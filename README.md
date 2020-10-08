@@ -1,1 +1,1 @@
-# An acc app test with Bootstrap Vuejs Flask
+# An app test with Bootstrap Vuejs Flask
