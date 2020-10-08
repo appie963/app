@@ -9,10 +9,9 @@
     <title>Signin Template for Bootstrap</title>
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../static/loginreg.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/main.css" rel="stylesheet" type="text/html"/>
     <!-- Custom styles for this template -->
-
-
+    <script defer="defer" type="text/javascript" src="./main.js"></script>
 </head>
 
 <body>
@@ -21,7 +20,7 @@
     <!-- 头部 -->
     <div class="page-header">
         <h1>{{ user }}的博客</h1>
-        <p>因为菜，所以需要更加努力！</p>
+        <p>{{ sign }}</p>
     </div>
     <!-- 导航 -->
     <nav class="navbar navbar-inverse">
@@ -32,7 +31,7 @@
             <li><a href="#">JavaScript</a></li>
             <li>
                 <!-- class是caret的 显现效果为一个倒三角形 -->
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">PHP <span class="caret"></span></a>
+                <a class="dropdown-toggle" data-toggle="dropdown">PHP <span class="caret"></span></a>
                 <!-- 下拉菜单 -->
                 <ul class="dropdown-menu">
                     <li><a href="#">PDO</a></li>
@@ -46,7 +45,7 @@
             <li><a href="#">Linux</a></li>
             <li><a href="#">bootstrap</a></li>
             <li>
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">账号管理 <span class="caret"></span></a>
+                <a class="dropdown-toggle" data-toggle="dropdown">账号管理<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="#">添加文章</a></li>
                     <li class="divider"></li>

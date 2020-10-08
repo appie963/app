@@ -7,9 +7,6 @@ app = Flask(__name__)
 
 # 加载自定义库zdb
 db = zdb(db_info)
-print(
-    # db.query('userlist', '*')
-)
 
 
 def login_acc(user_name, user_passwd):
